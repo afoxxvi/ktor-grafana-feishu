@@ -1,0 +1,10 @@
+ktor:
+  application:
+    modules:
+      - com.afoxxvi.ApplicationKt.module
+  deployment:
+    port: 8110
+feishu:
+  webhook-url: "https://open.feishu.cn/open-apis/bot/v2/hook/your-webhook-url"
+  template-id: "your-template-id"
+  template-version-name: "1.0.0"
