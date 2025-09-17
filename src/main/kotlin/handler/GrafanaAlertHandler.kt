@@ -31,15 +31,13 @@ object GrafanaAlertHandler {
         val title = grafanaAlert.title
         val message = grafanaAlert.message
         val sendUrl = Feishu.webhookUrl
-        val feishuMessage = Feishu.createMessage(
-            mapOf(
-                "title" to title,
-                "level" to "WARN",
-                "datetime" to LocalDateTime.now().toString(),
-                "message" to message,
-                "content" to "",
-            )
-        )
+        val feishuMessage = Feishu.createTemplateVariables {
+            "title" to title
+            "level" to "WARN"
+            "datetime" to LocalDateTime.now().toString()
+            "message" to message
+            "content" to ""
+        }
         // Send to Feishu
         val resp = client.post(sendUrl) {
             contentType(ContentType.Application.Json)

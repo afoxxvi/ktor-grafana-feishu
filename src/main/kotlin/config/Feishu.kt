@@ -1,5 +1,6 @@
 package com.afoxxvi.config
 
+import com.afoxxvi.dsl.MapBuilder
 import io.ktor.server.config.ApplicationConfig
 
 object Feishu {
@@ -15,6 +16,12 @@ object Feishu {
         webhookUrl = feishuConfig.property("webhook-url").getString()
         templateId = feishuConfig.property("template-id").getString()
         templateVersionName = feishuConfig.property("template-version-name").getString()
+    }
+
+    fun createTemplateVariables(mapDsl: MapBuilder<String, String>.() -> Unit): Map<String, Any> {
+        val builder = MapBuilder<String, String>()
+        builder.mapDsl()
+        return createMessage(builder.build())
     }
 
     fun createMessage(variables: Map<String, String>): Map<String, Any> {
