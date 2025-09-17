@@ -3,6 +3,7 @@ val logback_version: String by project
 
 plugins {
     kotlin("jvm") version "2.2.20"
+    kotlin("plugin.serialization") version "2.2.0"
     id("io.ktor.plugin") version "3.3.0"
 }
 
@@ -23,9 +24,10 @@ dependencies {
     implementation("io.ktor:ktor-client-cio")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
     implementation("io.ktor:ktor-client-content-negotiation")
-    implementation("io.ktor:ktor-server-content-negotiation:3.3.0")
-    implementation("io.ktor:ktor-serialization-jackson:3.3.0")
-    implementation("io.ktor:ktor-server-content-negotiation:3.3.0")
+    implementation("io.ktor:ktor-server-content-negotiation")
+    implementation("io.ktor:ktor-serialization-jackson")
+    implementation("io.ktor:ktor-server-host-common:3.3.0")
+    implementation("io.ktor:ktor-server-status-pages:3.3.0")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
