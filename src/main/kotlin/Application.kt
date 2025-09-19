@@ -29,4 +29,5 @@ fun Application.module() {
     }
     Feishu.init(environment.config)
     configureRouting()
+    println("Feishu Webhook URL: ${Feishu.webhookUrl}")
 }
