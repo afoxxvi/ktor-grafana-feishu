@@ -12,9 +12,12 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.jackson.jackson
+import io.ktor.server.application.log
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.*
+import kotlinx.serialization.json.Json
+import org.slf4j.MarkerFactory
 import java.time.LocalDateTime
 
 object GrafanaAlertHandler {
@@ -28,6 +31,8 @@ object GrafanaAlertHandler {
 
     val handler: suspend (RoutingContext.() -> Unit) = {
         val grafanaAlert = call.receive<GrafanaAlert>()
+        val rawJson = Json.encodeToString(grafanaAlert)
+        call.application.log.debug(MarkerFactory.getMarker("/grafana/alert.request"), rawJson)
         val title = grafanaAlert.title
         val message = grafanaAlert.message
         val sendUrl = Feishu.webhookUrl
